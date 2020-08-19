@@ -11,7 +11,7 @@
           <div class="col-12">
             <div class="q-gutter-xs">
               <q-btn class="full-width" color="primary" no-caps
-                     :label="$t('btns.LABEL_CLEAR')" @click="$sound.tap()"/>
+                     :label="$t('btns.LABEL_CLEAR')" @click="$sound.tap(), clear()"/>
               <div class="text-caption text-grey">
                 {{ $t('btns.HINT_CLEAR') }}
               </div>
@@ -206,7 +206,7 @@
 
 <script>
   import NumberStepper from "src/components/Component/Settings/NumberStepper";
-  import ImageSelector from "../components/Component/Settings/ImageSelector";
+  import ImageSelector from "src/components/Component/Settings/ImageSelector";
 
   export default {
     name: "Settings",
@@ -295,6 +295,23 @@
     methods: {
       goBack() {
         this.$router.go(-1);
+      },
+      clear() {
+        const that = this;
+        this.$q.dialog({
+          title: this.$t('btns.LABEL_CLEAR'),
+          message: this.$t('settings.clearConfirm'),
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          console.log(that.$q);
+          that.$q.localStorage.remove('settings');
+          that.$q.localStorage.remove('notification');
+          that.$q.localStorage.remove('favorite');
+          that.$q.localStorage.remove('history');
+          that.$q.localStorage.remove('upperHiddenBoard');
+          this.$router.go(0);
+        })
       }
     },
     mounted() {

@@ -81,6 +81,7 @@ export default {
     markAllAsRead: 'Mark all as read'
   },
   settings: {
+    clearConfirm: 'Are you sure you want to clear all data?',
     skins: {
       skin: 'Change with skin',
       skin00: 'Default',

@@ -81,6 +81,7 @@ export default {
     markAllAsRead: '标记全部为已读'
   },
   settings: {
+    clearConfirm: '你真的想要清除所有数据吗？',
     skins: {
       skin: '跟随谱面变化',
       skin00: '默认',
@@ -136,7 +137,7 @@ export default {
       effectVolume: '击打效果音量'
     },
     others: {
-      title: '语言·网络设定',
+      title: '其它设定',
       language: '语言',
       proxy: '资源服务器',
       testDone: '最高速度 {max}，平均速度 {avg}'
