@@ -1,12 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <audio id="audioPlayer"
-           ref="audioPlayer"
-           preload="auto"
-           loop
-           src="sound/bgm/before_live.mp3"/>
     <q-page-container class="bg" v-if="started">
-      <router-view />
+      <router-view/>
+      <top-menu />
     </q-page-container>
     <transition appear appear-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <q-page-container class="bg cursor-pointer" v-show="!started" @click="onStart">
@@ -15,55 +11,69 @@
             <div class="text-h3">BanG Player</div>
             <div class="text-body1" :style="`opacity: ${opacity}`">Tap to start</div>
           </div>
+          <div class="container absolute-bottom text-caption text-grey text-center">
+            {{ $t('statement') }}
+          </div>
         </q-page>
+        <download-dialog v-model="downloadDialogDisplay"/>
       </q-page-container>
     </transition>
+    <q-footer>
+      <music-controller/>
+    </q-footer>
   </q-layout>
 </template>
 
 <script>
-export default {
-  name: 'MainLayout',
-  data () {
-    return {
-      opacity: 1,
-      step: 0.04
-    }
-  },
-  computed: {
-    started: {
-      get() {
-        return this.$store.state.started;
+  import MusicController from "src/components/Style/MusicController";
+  import DownloadDialog from "src/components/Component/Local/DownloadDialog";
+  import TopMenu from "../components/Style/TopMenu";
+
+  export default {
+    name: 'MainLayout',
+    components: {TopMenu, DownloadDialog, MusicController},
+    data() {
+      return {
+        opacity: 1,
+        step: 0.04
       }
-    }
-  },
-  methods: {
-    onStart() {
-      this.$sound.start();
-      this.$store.commit('setStarted');
-      this.$audio.play();
-    }
-  },
-  async mounted() {
-    const loader = document.getElementById('loader');
-    let loaderOpacity = 1;
-    const fadeOut = setInterval(() => {
-      if(loaderOpacity <= 0) {
-        clearInterval(fadeOut);
-        document.removeChild(loader);
-      } else {
-        loader.style.opacity = loaderOpacity;
-        loaderOpacity -= 0.05;
+    },
+    computed: {
+      started: {
+        get() {
+          return this.$store.state.started;
+        }
+      },
+      downloadDialogDisplay: {
+        get() {
+          return this.$store.state.downloadDialog.downloadDialog.display;
+        },
+        set(v) {
+          this.$store.commit('downloadDialog/update', {
+            display: v
+          });
+        }
       }
-    }, 50);
-    const flasher = setInterval(() => {
-      if(this.opacity >= 1 || this.opacity <= 0) this.step = -this.step;
-      this.opacity += this.step;
-      if(this.started) clearInterval(flasher);
-    }, 50);
-    this.$audio.setPlayer(document.getElementById('audioPlayer'));
+    },
+    methods: {
+      onStart() {
+        this.$sound.start();
+        this.$store.commit('setStarted');
+        if(this.$route.path !== 'info') {
+          this.$audio.setDefaultAudio();
+          this.$audio.play();
+        }
+      }
+    },
+    async mounted() {
+      const flasher = setInterval(() => {
+        if (this.opacity >= 1 || this.opacity <= 0) this.step = -this.step;
+        this.opacity += this.step;
+        if (this.started) clearInterval(flasher);
+      }, 50);
+      this.$store.commit('notification/update', await this.$github.getRaw('ReiKohaku', 'BanG_Player_Wiki', '/notification.json'));
+    }
   }
-}
 </script>
 
 <style scoped>

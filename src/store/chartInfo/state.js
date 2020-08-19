@@ -1,5 +1,7 @@
 export default function () {
   return {
-    chartInfo: null
+    chartInfo: null,
+    chartData: null,
+    gameLoadConfig: null
   }
 }

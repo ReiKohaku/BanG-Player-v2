@@ -4,7 +4,7 @@
             style="margin-top: 8px" @click="$sound.tap(), toInfo()">
       <div class="relative-position">
         <q-img :ratio="1"
-               :src="(typeof info.cover === 'object') ? info.cover[jacketIndex] : info.cover"
+               :src="$settings.usePreferProxyUrl((typeof info.cover === 'object') ? info.cover[jacketIndex] : info.cover)"
                placeholder-src="img/jacket.png"
                transition="fade">
         </q-img>

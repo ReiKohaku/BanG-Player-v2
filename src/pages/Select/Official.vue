@@ -9,7 +9,11 @@
                    @click="$sound.tap(), $router.push('/')"/>
           </div>
           <div class="col">
-            <q-input label="搜索" v-model="searchVal" @input="search"/>
+            <q-input :label="$t('public.search')" v-model="searchVal" @input="search">
+              <template v-slot:append>
+                <q-btn flat round icon="mdi-subdirectory-arrow-left" @click="onDirect" />
+              </template>
+            </q-input>
           </div>
         </div>
         <div class="q-mt-md">
@@ -30,7 +34,7 @@
         <transition appear appear-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <div class="text-center q-mt-md" v-show="loading">
             <q-spinner/>
-            加载中……
+            {{ $t('public.loading') }}
           </div>
         </transition>
       </div>
@@ -113,6 +117,20 @@
             if (this.deepSearch(item[i], key)) return true;
           }
         } else return false;
+      },
+      onDirect() {
+        this.$q.dialog({
+          title: this.$t('dialogs.directlyStart.title'),
+          message: this.$t('dialogs.directlyStart.message'),
+          prompt: {
+            model: '',
+            type: 'number'
+          },
+          cancel: true,
+          persistent: true
+        }).onOk(data => {
+          this.$router.push(`official/${data}`);
+        })
       }
     },
     async mounted() {

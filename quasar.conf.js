@@ -23,7 +23,8 @@ module.exports = function (/* ctx */) {
       'i18n',
       'axios',
 	  'utils',
-	  'audio'
+	  'audio',
+	  'howler'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -99,13 +100,20 @@ cfg.module.rules.push({
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      // components: [],
+      components: [
+	    'QSlider',
+		'QToggle'
+	  ],
       // directives: [],
 
       // Quasar plugins
       plugins: [
 	    'Notify',
-		'Loading'
+		'Loading',
+		'AppFullscreen',
+		'LocalStorage',
+		'Dialog',
+		'BottomSheet'
 	  ]
     },
 

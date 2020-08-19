@@ -6,6 +6,9 @@ const {pad} = format;
 const server = ['jp', 'en', 'tw', 'cn', 'kr'];
 const diffName = ['easy', 'normal', 'hard', 'expert', 'special'];
 
+let officialChartList = null;
+let bandNameList = null;
+
 function bestdoriLangArrayAsObject(array) {
   const list = {
     'ja': null,
@@ -23,9 +26,9 @@ function bestdoriLangArrayAsObject(array) {
 }
 
 const OfficialUtil = {
-  async getOfficialBandName(bandId) {
-    let band = await Vue.prototype.$axios.get(`https://bestdori.fr.reikohaku.fun/api/bands/all.1.json`);
-    if (band[bandId]) return bestdoriLangArrayAsObject(band[bandId].bandName);
+  async getOfficialBandName(bandId, refresh) {
+    if(refresh || !bandNameList) bandNameList = await Vue.prototype.$axios.get(`https://bestdori.com/api/bands/all.1.json`);
+    if (bandNameList[bandId]) return bestdoriLangArrayAsObject(bandNameList[bandId].bandName);
     else return {
       'ja': '未知のアーティスト',
       'zh': '未知艺术家',
@@ -78,19 +81,56 @@ const OfficialUtil = {
   }
 }
 
+const CommunityUtil = {
+  getAudioSrc: async (item) => {
+    switch (item.type) {
+      case 'custom':
+        return item.audio;
+      case 'bandori':
+        return (await Bestdori.getOfficialSongInfo(item.id)).audio;
+      case 'llsif':
+        return `https://card.llsif.moe/asset/${await this.getSifInfo(item.id).mp3}`;
+      case 'osu':
+        return `https://beatconnect.io/audio/${item.id}/${item.diff}/`;
+      default:
+        return ''
+    }
+  },
+  getCoverSrc: async (item) => {
+    switch (item.type) {
+      case 'custom':
+        return item.cover;
+      case 'bandori':
+        return (await Bestdori.getOfficialSongInfo(item.id)).cover;
+      case 'llsif':
+        return `https://card.llsif.moe/asset/${await this.getSifInfo(item.id).cover}`;
+      case 'osu':
+        return `https://assets.ppy.sh/beatmaps/${item.id}/covers/cover.jpg`;
+      default:
+        return ''
+    }
+  },
+  getSifInfo: async (id) => {
+    let data = await Vue.prototype.$axios.get('https://bestdori.com/api/misc/llsif.5.json');
+    if (data && data[id]) return data[id];
+    else throw new Error('ERR_NO_LLSIF_SONG_DATA');
+  }
+}
+
 export const Bestdori = {
-  async getOfficialSongList() {
-    const data = await Vue.prototype.$axios.get('https://bestdori.reikohaku.fun/api/songs/all.5.json');
+  async getOfficialSongList(refresh) {
+    if(refresh || !officialChartList) officialChartList = await Vue.prototype.$axios.get('https://bestdori.com/api/songs/all.5.json');
     const list = [];
-    for (const i in data) {
+    for (const i in officialChartList) {
       list.push({
         id: i,
-        title: bestdoriLangArrayAsObject(data[i].musicTitle),
-        artist: await OfficialUtil.getOfficialBandName(data[i].bandId),
+        type: 'official',
+        title: bestdoriLangArrayAsObject(officialChartList[i].musicTitle),
+        artist: await OfficialUtil.getOfficialBandName(officialChartList[i].bandId),
         author: 'Craft Egg',
-        audio: OfficialUtil.getOfficialAudioSrc(i, data[i].publishedAt),
-        cover: OfficialUtil.getOfficialCoverSrc(i, data[i].jacketImage, data[i].publishedAt),
-        difficulty: OfficialUtil.getOfficialDifficultyList(data[i].difficulty)
+        audio: OfficialUtil.getOfficialAudioSrc(i, officialChartList[i].publishedAt),
+        cover: OfficialUtil.getOfficialCoverSrc(i, officialChartList[i].jacketImage, officialChartList[i].publishedAt),
+        difficulty: OfficialUtil.getOfficialDifficultyList(officialChartList[i].difficulty)
       });
     }
     return list;
@@ -104,20 +144,21 @@ export const Bestdori = {
       offset: 0,
       order: 'TIME_DESC'
     };
-    for(const i in config) {
+    for (const i in config) {
       params[i] = config[i];
     }
-    const data = await Vue.prototype.$axios.post('https://bestdori.reikohaku.fun/api/post/list', params);
-    if(!data.result) throw new Error('Network Error');
+    const data = await Vue.prototype.$axios.post('https://bestdori.com/api/post/list', params);
+    if (!data.result) throw new Error('Network Error');
     const list = [];
-    data.posts.forEach(item => {
+    for (const item of data.posts) {
       list.push({
         id: item.id,
+        type: 'bestdori',
         title: item.title,
         artist: item.artists,
         author: item.author.nickname || item.author.username,
-        audio: item.song.audio,
-        cover: item.song.cover,
+        audio: await CommunityUtil.getAudioSrc(item.song),
+        cover: await CommunityUtil.getCoverSrc(item.song),
         difficulty: [
           {
             type: diffName[item.diff],
@@ -125,8 +166,52 @@ export const Bestdori = {
           }
         ]
       });
-    })
-    return { done: params.offset + params.limit >= data.count , list };
+    }
+    return {done: params.offset + params.limit >= data.count, list};
+  },
+  async getOfficialSongInfo(id) {
+    const data = await Vue.prototype.$axios.get(`https://bestdori.com/api/songs/${id}.json`);
+    return {
+      id,
+      type: 'official',
+      title: bestdoriLangArrayAsObject(data.musicTitle),
+      artist: await OfficialUtil.getOfficialBandName(data.bandId),
+      author: 'Craft Egg',
+      audio: OfficialUtil.getOfficialAudioSrc(id, data.publishedAt),
+      cover: OfficialUtil.getOfficialCoverSrc(id, data.jacketImage, data.publishedAt),
+      difficulty: OfficialUtil.getOfficialDifficultyList(data.difficulty)
+    }
+  },
+  async getOfficialChartData(id, diff) {
+    const data = await Vue.prototype.$axios.get(`https://bestdori.com/api/songs/chart/${id}.${diff}.json`);
+    return data;
+  },
+  async getCommunityChartInfo(id) {
+    const data = await Vue.prototype.$axios.get('https://bestdori.com/api/post/details', {
+      params: {id}
+    });
+    const item = data.post;
+    return {
+      id,
+      type: 'bestdori',
+      title: item.title,
+      artist: item.artists,
+      author: item.author.nickname || item.author.username,
+      audio: await CommunityUtil.getAudioSrc(item.song),
+      cover: await CommunityUtil.getCoverSrc(item.song),
+      difficulty: [
+        {
+          type: diffName[item.diff],
+          level: item.level
+        }
+      ]
+    };
+  },
+  async getCommunityChartData(id) {
+    const data = await Vue.prototype.$axios.get('https://bestdori.com/api/post/details', {
+      params: {id}
+    });
+    return data;
   }
 };
 

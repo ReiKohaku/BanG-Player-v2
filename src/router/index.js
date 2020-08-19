@@ -17,10 +17,12 @@ export default function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach((to, from, next) => {
+    Store.commit('axiosCanceller/doCancel');
     if (to.name === 'info' && !Store.state.chartInfo.chartInfo) next('/');
     if (to.name) {
       const title = i18n.t(`title.${to.name}`);
-      if (to.name === 'info') document.title = `${Vue.prototype.$lang.getInLang(i18n.locale, Store.state.chartInfo.chartInfo.title)} - BanG Player`;
+      if ((to.name === 'info' || to.name === 'game') && Store.state.chartInfo.chartInfo)
+        document.title = `${Vue.prototype.$lang.getInLang(i18n.locale, Store.state.chartInfo.chartInfo.title)} - BanG Player`;
       else if (title != `title.${to.name}`) document.title = `${title} - BanG Player`;
       else document.title = `BanG Player`;
     }

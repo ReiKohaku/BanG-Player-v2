@@ -1,14 +1,37 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { i18n } from 'src/boot/i18n';
-import { Notify } from 'quasar';
+import {i18n} from 'src/boot/i18n';
+import {Notify} from 'quasar';
+import Settings from "src/lib/util/settings";
+import Store from 'src/store';
+
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
+axios.interceptors.request.use(config => {
+  config.cancelToken = new CancelToken(c => {
+    Store.commit('axiosCanceller/newCancel', c);
+  })
+  if (config.url.startsWith('https://bestdori.com'))
+    config.url = Settings.usePreferProxyUrl(config.url, true);
+  return config;
+}, e => {
+  return Promise.reject(e);
+})
 
 axios.interceptors.response.use(response => {
   return response.data;
 }, error => {
+  if (axios.isCancel(error)) {
+    return Promise.reject(error);
+  }
   let errMsg = '';
   if (!error.message) {
-    const code = error.response.status;
+    let code = null;
+    try {
+      code = error.response.status;
+    } catch {
+    }
     if (code === 403) {
       errMsg = 'ERR_FORBIDDEN';
     } else if (code === 400) {
