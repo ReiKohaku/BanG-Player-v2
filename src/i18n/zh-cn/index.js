@@ -51,7 +51,7 @@ export default {
   pack: {
     TITLE_DOWNLOAD_RESOURCES: '正在下载资源',
     TITLE_DOWNLOAD_CHART_DATA: '正在下载谱面数据',
-    MSG_GETTING_CHART_DATA: '正在获取{0}难度的谱面',
+    MSG_GETTING_CHART_DATA: '正在获取{0}难度的谱面……',
     MSG_GETTING_AUDIO: '获取音频中……',
     MSG_GETTING_COVER: '获取封面中……'
   },

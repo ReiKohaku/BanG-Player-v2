@@ -129,7 +129,13 @@
           cancel: true,
           persistent: true
         }).onOk(data => {
-          this.$router.push(`official/${data}`);
+          this.$q.loading.show();
+          try {
+            this.$router.push(`official/${data}`);
+          } catch {
+          } finally {
+            this.$q.loading.hide();
+          }
         })
       }
     },

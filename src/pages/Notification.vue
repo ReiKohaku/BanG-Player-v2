@@ -11,6 +11,7 @@
           <div class="col-12">
             <div>
               <q-btn no-caps
+                     color="primary"
                      class="full-width"
                      icon="mdi-check-double"
                      :label="$t('notification.markAllAsRead')"
@@ -22,6 +23,7 @@
             <q-list bordered class="rounded-borders">
               <q-expansion-item v-for="item in notification"
                                 :key="item.key"
+                                class="bg-white"
                                 expand-separator
                                 :label="getPreferLang(item).title"
                                 :caption="new Date(item.time).toString()">

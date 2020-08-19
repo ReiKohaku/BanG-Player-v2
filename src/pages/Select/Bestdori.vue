@@ -98,7 +98,13 @@
           cancel: true,
           persistent: true
         }).onOk(data => {
-          this.$router.push(`bestdori/${data}`);
+          this.$q.loading.show();
+          try {
+            this.$router.push(`bestdori/${data}`);
+          } catch {
+          } finally {
+            this.$q.loading.hide();
+          }
         })
       }
     },
