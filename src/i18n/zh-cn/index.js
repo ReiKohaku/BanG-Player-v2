@@ -152,6 +152,13 @@ export default {
     search: '搜索',
     tip: '提示'
   },
+  serviceWorker: {
+    cached: 'BanG Player已成功缓存到本地，可以创建离线应用。',
+    updateFound: '发现BanG Player新版本，正在下载……',
+    updated: 'BanG Player新版本已经可用，请刷新页面~',
+    offline: '现在没有网络连接，应用使用离线模式运行。',
+    error: 'Service worker注册时发生错误，请您检查您的配置是否有问题。'
+  },
   TITLE_COPY_SHARE_LINK: '复制链接',
   INFO_COPY_TO_CLIPBOARD_SUCCESS: '成功将分享链接复制到剪切板！',
   INFO_COPY_TO_CLIPBOARD_FAILED: '复制分享链接到剪切板失败，请手动复制。',

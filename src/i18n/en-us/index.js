@@ -152,6 +152,13 @@ export default {
     search: 'Search',
     tip: 'Tip'
   },
+  serviceWorker: {
+    cached: 'BanG Player cached successfully, you can create offline application since now.',
+    updateFound: 'Discovered new version of BanG Player, downloading...',
+    updated: 'A new version available for BanG Player, please refresh.',
+    offline: 'No network connection for now. Application will run in offline mode.',
+    error: 'An error occurred when register service worker, please check your configuration.'
+  },
   TITLE_COPY_SHARE_LINK: 'Copy the share link',
   INFO_COPY_TO_CLIPBOARD_SUCCESS: 'Copy the share link to clipboard successfully!',
   INFO_COPY_TO_CLIPBOARD_FAILED: 'Failed to copy the share link to clipboard, please copy it manually',

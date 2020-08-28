@@ -1,6 +1,6 @@
 {
   "name": "bang_player_v2",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A BanG Dream! Girl's Band Party web simulator",
   "productName": "BanG Player v2",
   "author": "ReiKohaku <hbsjzjwj@163.com>",
@@ -12,8 +12,8 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
-    "bangbangboom-game": "git+https://gitee.com/ReiKohaku/bangbangboom-game.git",
-    "bangbangboom-game-dev": "git://github.com/K024/bangbangboom-game.git#dev#3928e78",
+	"bangbangboom-game": "git+https://gitee.com/ReiKohaku/bangbangboom-game.git",
+    "bangbangboom-game-dev": "git://github.com/K024/bangbangboom-game.git",
     "core-js": "^3.6.5",
     "howler": "^2.2.0",
     "jszip": "^3.5.0",

@@ -140,7 +140,7 @@ export default {
       title: 'その他の設定',
       language: '言語',
       proxy: 'リソースサーバ',
-      testDone: '最高速度 {max}，平均速度 {avg}'
+      testDone: '最高速度 {max}、平均速度 {avg}'
     }
   },
   public: {
@@ -151,6 +151,13 @@ export default {
     empty: '何もありませんね...',
     search: '検索',
     tip: 'ヒント'
+  },
+  serviceWorker: {
+    cached: 'BanG Playerはローカルにキャッシュされました。オフラインアプリケーションを作成できます。',
+    updateFound: 'BanG Playerの新しいバージョンが見つかりました。ダウンロードしています...',
+    updated: 'BanG Playerの新しいバージョンはすでに使えます。ホームページを更新してください。',
+    offline: '現在はネットワーク接続がありません。オフラインモードで動作します。',
+    error: 'Service worker登録時にエラーが発生しました。設定に問題があるかどうか確認してください。'
   },
   TITLE_COPY_SHARE_LINK: 'リンクをコピー',
   INFO_COPY_TO_CLIPBOARD_SUCCESS: 'クリップボードにコピーしました。',

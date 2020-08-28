@@ -15,7 +15,7 @@
 
 <script>
   import {Game} from 'bangbangboom-game';
-  import UpperHiddenBoard from "../components/Style/UpperHiddenBoard";
+  import UpperHiddenBoard from "src/components/Style/UpperHiddenBoard";
   import {dom} from 'quasar';
 
   const {height, width} = dom;

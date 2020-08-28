@@ -33,7 +33,7 @@
       </q-scroll-area>
     </q-drawer>
     <q-page-container>
-      <q-page class="bg-grey-1">
+      <q-page class="bg-grey-1" v-if="!loading">
         <div class="container">
           <div class="row q-col-gutter-md">
             <div class="col-12" v-html="currentContent"/>
@@ -44,6 +44,12 @@
                  icon="mdi-menu"
                  @click="drawer = !drawer"/>
         </q-page-sticky>
+      </q-page>
+      <q-page class="sgm flex flex-center" v-else>
+        <div>
+          <q-spinner/>
+          {{ $t('public.loading') }}
+        </div>
       </q-page>
     </q-page-container>
   </q-layout>
@@ -64,7 +70,8 @@
         repoContent: null,
         content: {},
         currentContent: null,
-        lang: 'zh-cn'
+        lang: 'zh-cn',
+        loading: false
       };
     },
     methods: {
@@ -97,7 +104,7 @@
     },
     async mounted() {
       this.$audio.fadeOutPause();
-      this.$q.loading.show();
+      this.loading = true;
       try {
         this.lang = this.$i18n.locale;
         this.repoContent = await this.$github.getContent('ReiKohaku', 'BanG_Player_Wiki');
@@ -106,7 +113,7 @@
         this.changeContent('README');
       } catch {
       } finally {
-        this.$q.loading.hide();
+        this.loading = false;
       }
     }
   }
