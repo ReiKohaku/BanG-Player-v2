@@ -87,7 +87,7 @@
               </div>
             </q-card>
           </div>
-          <div class="col-12">
+          <div class="col-12" v-if="difficulties && difficulties.length > 1">
             <q-btn-toggle v-model="difficulty"
                           color="white"
                           text-color="black"
@@ -119,9 +119,13 @@
           </div>
           <div class="col-12">
             <div>
-              <q-btn class="full-width" no-caps color="primary"
+              <q-btn class="full-width" no-caps :color="difficulty"
                      :label="$t('btns.LABEL_START_GAME')" icon="mdi-music-clef-treble"
-                     @click="onStart" :disable="loading" :loading="loading"/>
+                     @click="onStart" :disable="loading" :loading="loading">
+                <q-badge :color="modHelperList[mod].color" floating v-if="mod && modHelperList[mod] && mod.length > 0">
+                  {{ modHelperList[mod].text }} mod ON
+                </q-badge>
+              </q-btn>
             </div>
           </div>
         </div>
@@ -186,7 +190,17 @@ export default {
     },
     ...mapGetters({
       isFavorite: 'favorite/isFavorite'
-    })
+    }),
+    mod: {
+      get() {
+        return this.$store.state.mods.mod;
+      }
+    },
+    modHelperList: {
+      get() {
+        return this.$store.state.mods.modHelperList || [];
+      }
+    }
   },
   methods: {
     async onStart() {

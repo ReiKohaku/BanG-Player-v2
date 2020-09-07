@@ -31,13 +31,13 @@
                   <q-card-section>
                     <div v-html="markdown(getPreferLang(item).content)"/>
                   </q-card-section>
-                  <q-card-actions v-if="!readList.includes(item.key)">
-                    <q-btn no-caps
-                           class="full-width"
-                           icon="mdi-check"
-                           :label="$t('notification.markAsRead')"
-                           @click="$store.commit('notification/setRead', [item])"/>
-                  </q-card-actions>
+                  <q-btn no-caps
+                         flat
+                         class="full-width"
+                         icon="mdi-check"
+                         :label="$t('notification.markAsRead')"
+                         @click="$store.commit('notification/setRead', [item])"
+                         v-if="!readList.includes(item.key)"/>
                 </q-card>
               </q-expansion-item>
             </q-list>
@@ -49,40 +49,40 @@
 </template>
 
 <script>
-  import 'src/css/github.css';
-  import showdown from 'showdown';
+import 'src/css/github.css';
+import showdown from 'showdown';
 
-  showdown.setOption('openLinksInNewWindow', true);
-  let converter = new showdown.Converter();
+showdown.setOption('openLinksInNewWindow', true);
+let converter = new showdown.Converter();
 
-  export default {
-    name: "Notification",
-    computed: {
-      notification: {
-        get() {
-          return this.$store.state.notification.notification;
-        }
-      },
-      readList: {
-        get() {
-          return this.$store.state.notification.readList;
-        }
+export default {
+  name: "Notification",
+  computed: {
+    notification: {
+      get() {
+        return this.$store.state.notification.notification;
       }
     },
-    methods: {
-      markdown(text) {
-        return converter.makeHtml(text);
-      },
-      getPreferLang(item) {
-        if (item[this.$i18n.locale]) return item[this.$i18n.locale];
-        else if (item['en-us']) return item['en-us'];
-        else return item['zh-cn'];
+    readList: {
+      get() {
+        return this.$store.state.notification.readList;
       }
-    },
-    async mounted() {
-
     }
+  },
+  methods: {
+    markdown(text) {
+      return converter.makeHtml(text);
+    },
+    getPreferLang(item) {
+      if (item[this.$i18n.locale]) return item[this.$i18n.locale];
+      else if (item['en-us']) return item['en-us'];
+      else return item['zh-cn'];
+    }
+  },
+  async mounted() {
+
   }
+}
 </script>
 
 <style scoped>
