@@ -9,7 +9,7 @@
            @click="doFullScreen"/>
     <div class="fixed-bottom"
          style="z-index: 99;"
-         v-if="mod && mod.length > 0">
+         v-if="mod && modHelperList[mod] && mod.length > 0">
       <div class="text-center">
         <q-badge :color="modHelperList[mod].color">
           {{ modHelperList[mod].text }} mod ON
