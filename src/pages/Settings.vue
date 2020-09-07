@@ -179,6 +179,20 @@
                 </q-tab-panel>
                 <q-tab-panel name="others">
                   <div class="row q-col-gutter-md items-center">
+                    <div class="col-12">
+                      <div class="row q-col-gutter-sm">
+                        <div class="col-12">{{$t('settings.others.bgm')}}</div>
+                        <div class="col-12">
+                          {{`${$lang.getInLang($i18n.locale, settings.bgm.artist)} - ${$lang.getInLang($i18n.locale, settings.bgm.title)}`}}
+                        </div>
+                        <div class="col-12">
+                          <q-btn class="full-width"
+                                 color="primary"
+                                 dense
+                                 :label="$t('settings.others.resetBgm')" @click="onResetBgm"/>
+                        </div>
+                      </div>
+                    </div>
                     <div class="col-xs-12 col-sm-6">
                       <q-select v-model="settings.language"
                                 :options="languageList"
@@ -304,7 +318,6 @@
           cancel: true,
           persistent: true
         }).onOk(() => {
-          console.log(that.$q);
           that.$q.localStorage.remove('settings');
           that.$q.localStorage.remove('notification');
           that.$q.localStorage.remove('favorite');
@@ -312,6 +325,20 @@
           that.$q.localStorage.remove('upperHiddenBoard');
           this.$router.go(0);
         })
+      },
+      onResetBgm() {
+        this.settings.bgm = {
+          src: 'sound/bgm/before_live.mp3',
+          cover: 'img/before_live.jpg',
+          title: 'ライブしよう!',
+          artist: 'BanG Dream!',
+          offset: 0,
+          timePoints: [{bpm: 140, time: 0}]
+        };
+        this.$audio.fadeOutPause(() => {
+          this.$audio.setDefaultAudio();
+          this.$audio.play();
+        });
       }
     },
     mounted() {

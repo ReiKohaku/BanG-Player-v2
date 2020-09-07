@@ -108,6 +108,11 @@ const Settings = {
   setAll(config) {
     localStorage.setItem('settings', JSON.stringify(config));
   },
+  set(key, value) {
+    const config = this.getAll();
+    config[key] = value;
+    this.setAll(config);
+  },
   getPreferProxyUrl() {
     if (Settings.get('proxy').proxy) return Settings.get('proxy').value;
     else {

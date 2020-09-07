@@ -3,7 +3,7 @@
     <div class="q-pa-sm">
       <div class="row q-col-gutter-md items-center">
         <div class="col-auto">
-          <q-img :ratio="1" :src="cover" style="width: 36px"/>
+          <q-img :ratio="1" :src="(typeof cover === 'string') ? cover : cover[0]" style="width: 36px"/>
         </div>
         <div class="col-auto">
           <q-btn round color="white" text-color="primary" size="md"
@@ -13,7 +13,7 @@
         <div class="col">
           <div class="row q-col-gutter-sm">
             <div class="col ellipsis">
-              {{ `${artist} - ${title}` }}
+              {{ `${$lang.getInLang($i18n.locale, artist)} - ${$lang.getInLang($i18n.locale, title)}` }}
             </div>
             <div class="col-auto">
               <q-btn style="margin: -24px 8px 8px 8px"

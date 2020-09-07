@@ -140,7 +140,9 @@ export default {
       title: '其它设定',
       language: '语言',
       proxy: '资源服务器',
-      testDone: '最高速度 {max}，平均速度 {avg}'
+      testDone: '最高速度 {max}，平均速度 {avg}',
+      bgm: '主页音乐',
+      resetBgm: '重置主页音乐为默认'
     }
   },
   public: {
@@ -164,6 +166,8 @@ export default {
   INFO_COPY_TO_CLIPBOARD_FAILED: '复制分享链接到剪切板失败，请手动复制。',
   TIP_NOT_HORIZONTAL: '建议您将设备横置游玩。',
   ERR_CHART_NOT_EXIST: '这张谱面并不存在！',
+  INFO_SET_INDEX_MUSIC_SUCCESS: '已经成功将{0}设置为主页音乐~',
+  ERR_SET_INDEX_MUSIC_FAILED: '设置{0}为主页音乐失败了QAQ',
   'Network Error': '网络错误，请检查您的网络连接。',
   statement: '本应用为开源应用，您可以在Github或Gitee上查看。这也是一款非商业性质的应用。应用使用的所有资源均来源于网络，与开发者无关。只要您点击屏幕继续，就视为您同意以上所述。'
 }
