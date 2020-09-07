@@ -31,6 +31,10 @@ const proxyList = [
     proxy: true
   }
 ];
+const langIsoList = {
+  'zh-cn': 'zh-hans',
+  'ja-jp': 'ja'
+}
 
 export {languageList, languageName, skinList, soundList, backgroundList, proxyList};
 
@@ -94,6 +98,7 @@ const Settings = {
   soundList,
   backgroundList,
   proxyList,
+  langIsoList,
   getAll() {
     let config = {};
     try {

@@ -189,6 +189,7 @@
                           <q-btn class="full-width"
                                  color="primary"
                                  dense
+                                 no-caps
                                  :label="$t('settings.others.resetBgm')" @click="onResetBgm"/>
                         </div>
                       </div>
@@ -241,6 +242,12 @@
       'settings.language': {
         handler: function (val) {
           this.$i18n.locale = val;
+          try {
+            import(`quasar/lang/${this.$settings.langIsoList[val] || val}.js`
+              ).then(lang => {
+              this.$q.lang.set(lang.default)
+            })
+          } catch {}
         }
       }
     },

@@ -140,7 +140,9 @@ export default {
       title: 'その他の設定',
       language: '言語',
       proxy: 'リソースサーバ',
-      testDone: '最高速度 {max}、平均速度 {avg}'
+      testDone: '最高速度 {max}、平均速度 {avg}',
+      bgm: 'ホームページの音楽',
+      resetBgm: 'ホームページの音楽をデフォルトにリセット'
     }
   },
   public: {
@@ -164,6 +166,8 @@ export default {
   INFO_COPY_TO_CLIPBOARD_FAILED: 'クリップボードにリンクしたコピーに失敗しました、手動でコピーしてください。',
   TIP_NOT_HORIZONTAL: 'デバイスを横にして遊ぶことをお勧めします。',
   ERR_CHART_NOT_EXIST: 'この譜面は存在しません。',
+  INFO_SET_INDEX_MUSIC_SUCCESS: '{0}をホームページの音楽として設定しました。',
+  ERR_SET_INDEX_MUSIC_FAILED: '{0}をホームページの音楽として設定できませんでした。',
   'Network Error': 'データの取得に失敗しました。ネットワーク接続を確認してください。',
   statement: 'このアプリケーションはオープンソースアプリケーションです。GithubまたはGiteeで確認できます。これも非商業的なアプリケーションです。アプリケーションで使用されるすべてのリソースは、開発者に関係なくネットワークから発生します。画面をクリックして続けば、上記の内容に同意したと見なされます。'
 }

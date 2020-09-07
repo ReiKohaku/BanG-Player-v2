@@ -140,7 +140,9 @@ export default {
       title: 'Others',
       language: 'Language',
       proxy: 'Resource Server',
-      testDone: 'Max speed {max}, average speed {avg}'
+      testDone: 'Max speed {max}, average speed {avg}',
+      bgm: 'Index music',
+      resetBgm: 'Reset index music with default'
     }
   },
   public: {
@@ -164,6 +166,8 @@ export default {
   INFO_COPY_TO_CLIPBOARD_FAILED: 'Failed to copy the share link to clipboard, please copy it manually',
   TIP_NOT_HORIZONTAL: 'It is recommended that you set the device horizontally.',
   ERR_CHART_NOT_EXIST: 'This chart is not exist!',
+  INFO_SET_INDEX_MUSIC_SUCCESS: 'Set {0} as index music successfully.',
+  ERR_SET_INDEX_MUSIC_FAILED: 'Set {0} as index music failed.',
   'Network Error': 'Network error, please check your network connection.',
   statement: 'This application is an open-source-project, you can check it on Github or Gitee. It is also a non-commercial application. All the resources it uses come from the network, developer is not responsible. Once you click to go next, it is determined as you agree with what this statement said.'
 }
