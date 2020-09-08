@@ -132,10 +132,20 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
+        package: 'com.reikohaku.bangplayer',
         name: `BanG Player v2`,
         short_name: `BanG Player v2`,
         description: `A BanG Dream! Girl's Band Party web simulator`,
-        display: 'standalone',
+        icon: 'icons/icon-192x192.png',
+        versionName: 'v2.0.2',
+        versionCode: 3,
+        minPlatformVersion: 1060,
+        display: {
+          backgroundColor: '#FFA4CF',
+          fullScreen: true,
+          orientation: 'landscape',
+          fitCutout: 'portrait|landscape'
+        },
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
