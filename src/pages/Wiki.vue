@@ -36,7 +36,10 @@
       <q-page class="bg-grey-1" v-if="!loading">
         <div class="container">
           <div class="row q-col-gutter-md">
-            <div class="col-12" v-html="currentContent"/>
+            <div class="col-12" v-html="currentContent" v-if="currentContent"/>
+            <div class="col-12 text-bold text-center" v-else>
+              {{ $t('Network Error') }}
+            </div>
           </div>
         </div>
         <q-page-sticky position="bottom-left" :offset="[12, 12]">
@@ -50,6 +53,11 @@
           <q-spinner/>
           {{ $t('public.loading') }}
         </div>
+        <q-page-sticky position="bottom-left" :offset="[12, 12]">
+          <q-btn flat round unelevated color="primary"
+                 icon="mdi-menu"
+                 @click="drawer = !drawer"/>
+        </q-page-sticky>
       </q-page>
     </q-page-container>
   </q-layout>
