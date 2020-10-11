@@ -1,0 +1,12 @@
+{
+  "name": "bang_player_v2",
+  "version": "2.0.2",
+  "description": "A BanG Dream! Girl's Band Party web simulator",
+  "author": "ReiKohaku <hbsjzjwj@163.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "2.4.2",
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0"
+  }
+}

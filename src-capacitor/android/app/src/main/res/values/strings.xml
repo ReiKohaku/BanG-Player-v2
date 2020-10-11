@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BanG Player v2</string>
+    <string name="title_activity_main">BanG Player v2</string>
+    <string name="package_name">fun.reikohaku.bangplayer</string>
+    <string name="custom_url_scheme">fun.reikohaku.bangplayer</string>
+</resources>

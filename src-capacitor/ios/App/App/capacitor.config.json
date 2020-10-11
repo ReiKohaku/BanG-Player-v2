@@ -1,0 +1,7 @@
+{
+  "appId": "fun.reikohaku.bangplayer",
+  "appName": "BanG Player v2",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}
