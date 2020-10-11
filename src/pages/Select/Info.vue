@@ -49,7 +49,7 @@
                                style="margin: 8px 8px 8px 8px;"
                                round
                                color="red"
-                               icon="mdi-music"
+                               icon="mdi-home"
                                size="md"
                                @click="$sound.tap(), onSetIndexMusic()"
                                :disable="loading || !shareTypeList.includes(chartInfo.type)" />
