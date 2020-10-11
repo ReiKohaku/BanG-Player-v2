@@ -18,17 +18,32 @@ const proxyList = [
   {
     label: 'fr',
     value: 'https://bestdori.bangplayer.live',
-    proxy: true
+    proxy: true,
+    prefer: ['en-us', 'ja-jp']
+  },
+  {
+    label: 'cn3',
+    value: 'https://bj.bestdori.reikohaku.fun',
+    proxy: true,
+    prefer: ['zh-cn']
+  },
+  {
+    label: 'cn4',
+    value: 'https://sonolus.reikohaku.fun/bestdori',
+    proxy: true,
+    prefer: ['zh-cn']
   },
   {
     label: 'cn1',
     value: 'https://bestdori.reikohaku.fun',
-    proxy: true
+    proxy: true,
+    prefer: ['zh-cn']
   },
   {
     label: 'cn2',
     value: 'https://bd.reikohaku.fun',
-    proxy: true
+    proxy: true,
+    prefer: ['zh-cn']
   }
 ];
 const langIsoList = {

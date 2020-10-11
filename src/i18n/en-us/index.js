@@ -105,8 +105,9 @@ export default {
     proxys: {
       direct: 'Direct to Bestdori! (Recommended)',
       cn1: 'China-Zhangjiakou (1Mbps, stable for Chinese users)',
-      cn2: 'China-Shanghai (1Mbps, stable for Chinese users)',
-      cn3: 'China-Shanghai (5Mbps, stable for Chinese users)',
+      cn2: 'China-Shanghai (1Mbps, Baidu CDN)',
+      cn3: 'China-Beijing (5Mbps, Baidu CDN)',
+      cn4: 'China-Shanghai (5Mbps, Tencent & Baidu CDN)',
       fr: 'French-Eppes (Duplex 100Mbps)'
     },
     live: {

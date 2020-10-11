@@ -106,7 +106,8 @@ export default {
       direct: '直连Bestdori!（推荐）',
       cn1: '中国 张家口（1Mbps）',
       cn2: '中国 上海（1Mbps，百度CDN加速）',
-      cn3: '中国 上海（5Mbps）',
+      cn3: '[推荐]中国 北京（5Mbps，百度CDN加速）',
+      cn4: '[推荐]中国 上海（5Mbps，腾讯+百度CDN混合加速）',
       fr: '法国（100Mbps，Cloudflare加速）'
     },
     live: {
