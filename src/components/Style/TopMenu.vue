@@ -1,7 +1,7 @@
 <template>
   <q-page-sticky position="bottom-left" :offset="[12, -18]">
     <q-fab color="primary" text-color="white" direction="up" icon="mdi-menu" push>
-      <q-fab-action color="secondary" @click="$q.fullscreen.toggle()"
+      <q-fab-action color="secondary" @click="$action.fullScreen()"
                     :icon="$q.fullscreen.isActive ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"/>
     </q-fab>
   </q-page-sticky>

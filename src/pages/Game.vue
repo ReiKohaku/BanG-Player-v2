@@ -6,7 +6,7 @@
            class="fixed-top-right"
            style="z-index: 99;"
            :icon="$q.fullscreen.isActive ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
-           @click="doFullScreen"/>
+           @click="$action.fullScreen()"/>
     <div class="fixed-bottom"
          style="z-index: 99;"
          v-if="mod && modHelperList[mod] && mod.length > 0">
@@ -51,12 +51,6 @@ export default {
     }
   },
   methods: {
-    doFullScreen() {
-      try {
-        this.$q.fullscreen.toggle();
-      } catch {
-      }
-    }
   },
   async mounted() {
     this.$audio.pause();
@@ -114,7 +108,7 @@ export default {
     gameContainer.appendChild(canvas);
 
     try {
-      if (settings.autoFullscreen && !this.$q.fullscreen.isActive) await this.$q.fullscreen.toggle();
+      if (settings.autoFullscreen && !this.$q.fullscreen.isActive) await this.$action.fullScreen();
     } catch {
     }
 
