@@ -26,7 +26,7 @@
                                 class="bg-white"
                                 expand-separator
                                 :label="getPreferLang(item).title"
-                                :caption="new Date(item.time).toString()">
+                                :caption="new Date(item.time).toLocaleString()">
                 <q-card>
                   <q-card-section>
                     <div v-html="markdown(getPreferLang(item).content)"/>
