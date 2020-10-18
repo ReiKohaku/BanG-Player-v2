@@ -96,6 +96,12 @@
                          :label="$t('btns.LABEL_WIKI')" @click="doPush('/wiki')"/>
                 </transition>
               </div>
+              <div class="col-12">
+                <transition appear appear-active-class="animated fadeInLeft">
+                  <q-btn color="secondary" class="full-width" no-caps
+                         :label="$t('btns.LABEL_EBBB')" @click="doPush('/ebbb')"/>
+                </transition>
+              </div>
             </div>
           </div>
         </div>

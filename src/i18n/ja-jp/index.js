@@ -14,7 +14,8 @@ export default {
     LABEL_PACK: '圧縮',
     LABEL_SHARE: '共有',
     LABEL_SELECT_A_IMAGE: '画像を選択...',
-    LABEL_RESET_IMAGE: 'リセット'
+    LABEL_RESET_IMAGE: 'リセット',
+    LABEL_EBBB: 'bangbangboom editor テスト'
   },
   dialogs: {
     directlyStart: {
@@ -145,6 +146,12 @@ export default {
       bgm: 'ホームページの音楽',
       resetBgm: 'ホームページの音楽をデフォルトにリセット'
     }
+  },
+  ebbb: {
+    input: {
+      message: 'アップロード後に表示されるIDをbangbangboom editorに入力してください：'
+    },
+    author: 'bangbangboom editor ユーザー'
   },
   public: {
     success: '成功',

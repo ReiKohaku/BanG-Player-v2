@@ -14,7 +14,8 @@ export default {
     LABEL_PACK: '打包',
     LABEL_SHARE: '分享',
     LABEL_SELECT_A_IMAGE: '选择一张图片',
-    LABEL_RESET_IMAGE: '重置'
+    LABEL_RESET_IMAGE: '重置',
+    LABEL_EBBB: 'bangbangboom editor测试'
   },
   dialogs: {
     directlyStart: {
@@ -145,6 +146,12 @@ export default {
       bgm: '主页音乐',
       resetBgm: '重置主页音乐为默认'
     }
+  },
+  ebbb: {
+    input: {
+      message: '请输入在bangbangboom editor中上传完成后显示的ID：'
+    },
+    author: 'bangbangboom editor使用者'
   },
   public: {
     success: '成功',

@@ -14,7 +14,8 @@ export default {
     LABEL_PACK: 'Pack',
     LABEL_SHARE: 'Share',
     LABEL_SELECT_A_IMAGE: 'Select a image',
-    LABEL_RESET_IMAGE: 'Reset'
+    LABEL_RESET_IMAGE: 'Reset',
+    LABEL_EBBB: 'bangbangboom editor test'
   },
   dialogs: {
     directlyStart: {
@@ -145,6 +146,12 @@ export default {
       bgm: 'Index music',
       resetBgm: 'Reset index music with default'
     }
+  },
+  ebbb: {
+    input: {
+      message: 'Please input the ID which display in the dialog after the chart has been uploaded in bangbangboom editor:'
+    },
+    author: 'bangbangboom editor user'
   },
   public: {
     success: 'Success',

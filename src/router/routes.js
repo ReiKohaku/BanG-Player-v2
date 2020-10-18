@@ -15,7 +15,8 @@ const routes = [
       { name: 'settings', path: 'settings', component: () => import('pages/Settings.vue') },
       { name: 'favorite', path: 'favorite', component: () => import('pages/Select/Favorite.vue') },
       { name: 'info', path: 'info', component: () => import('pages/Select/Info.vue') },
-      { name: 'notification', path: 'notification', component: () => import('pages/Notification.vue') }
+      { name: 'notification', path: 'notification', component: () => import('pages/Notification.vue') },
+      { name: 'ebbb', path: 'ebbb', component: () => import('pages/EbbbTest.vue') }
     ]
   },
   {
