@@ -76,7 +76,7 @@
               <div class="col-6">
                 <transition appear appear-active-class="animated fadeInLeft">
                   <div class="relative-position">
-                    <q-btn color="primary"
+                    <q-btn color="secondary"
                            class="full-width"
                            no-caps
                            :label="$t('btns.LABEL_NOTIFICATION')"
@@ -92,7 +92,7 @@
               </div>
               <div class="col-12">
                 <transition appear appear-active-class="animated fadeInLeft">
-                  <q-btn color="primary" class="full-width" no-caps
+                  <q-btn color="black" class="full-width" no-caps
                          :label="$t('btns.LABEL_WIKI')" @click="doPush('/wiki')"/>
                 </transition>
               </div>
