@@ -23,21 +23,22 @@
             <q-list bordered class="rounded-borders">
               <q-expansion-item v-for="item in notification"
                                 :key="item.key"
-                                class="bg-white"
+                                :class="`bg-white ${readList.includes(item.key) ? 'text-black' : 'text-red'}`"
                                 expand-separator
                                 :label="getPreferLang(item).title"
                                 :caption="new Date(item.time).toLocaleString()">
                 <q-card>
                   <q-card-section>
-                    <div v-html="markdown(getPreferLang(item).content)"/>
+                    <div class="text-black" v-html="markdown(getPreferLang(item).content)"/>
                   </q-card-section>
                   <q-btn no-caps
                          flat
-                         class="full-width"
+                         class="full-width text-black"
                          icon="mdi-check"
                          :label="$t('notification.markAsRead')"
                          @click="$store.commit('notification/setRead', [item])"
-                         v-if="!readList.includes(item.key)"/>
+                         v-if="!readList.includes(item.key)">
+                  </q-btn>
                 </q-card>
               </q-expansion-item>
             </q-list>
@@ -51,6 +52,7 @@
 <script>
 import 'src/css/github.css';
 import showdown from 'showdown';
+import {LocalStorage} from "quasar";
 
 showdown.setOption('openLinksInNewWindow', true);
 let converter = new showdown.Converter();
@@ -80,7 +82,6 @@ export default {
     }
   },
   async mounted() {
-
   }
 }
 </script>
