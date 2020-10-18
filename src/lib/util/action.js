@@ -5,10 +5,6 @@ const Action = {
     try {
       await Vue.prototype.$q.fullscreen.toggle();
     } catch (e) {
-      try {
-        await Vue.prototype.$q.capacitor.fullScreen();
-      } catch (e) {
-      }
     }
   }
 }

@@ -3,8 +3,5 @@
   "appName": "BanG Player v2",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "www",
-  "server": {
-    "url": "http://172.27.208.1:8080"
-  }
+  "webDir": "www"
 }
