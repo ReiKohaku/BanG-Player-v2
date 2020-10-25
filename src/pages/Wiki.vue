@@ -68,6 +68,7 @@
   import showdown from 'showdown';
 
   showdown.setOption('openLinksInNewWindow', true);
+  showdown.setOption('tables', true);
   let converter = new showdown.Converter();
 
   export default {
