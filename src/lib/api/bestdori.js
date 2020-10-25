@@ -81,39 +81,48 @@ const OfficialUtil = {
   }
 }
 
+const getSifInfo = async (id) => {
+  let data = await Vue.prototype.$axios.get('https://bestdori.com/api/misc/llsif.5.json');
+  if (data && data[id]) return data[id];
+  else throw new Error('ERR_NO_LLSIF_SONG_DATA');
+}
+
 const CommunityUtil = {
   getAudioSrc: async (item) => {
-    switch (item.type) {
-      case 'custom':
-        return item.audio;
-      case 'bandori':
-        return (await Bestdori.getOfficialSongInfo(item.id)).audio;
-      case 'llsif':
-        return `https://card.llsif.moe/asset/${await this.getSifInfo(item.id).mp3}`;
-      case 'osu':
-        return `https://beatconnect.io/audio/${item.id}/${item.diff}/`;
-      default:
-        return ''
+    try {
+      switch (item.type) {
+        case 'custom':
+          return item.audio;
+        case 'bandori':
+          return (await Bestdori.getOfficialSongInfo(item.id)).audio;
+        case 'llsif':
+          return `https://card.llsif.moe/asset/${(await getSifInfo(item.id)).mp3}`;
+        case 'osu':
+          return `https://beatconnect.io/audio/${item.id}/${item.diff}/`;
+        default:
+          return ''
+      }
+    } catch {
+      return '';
     }
   },
   getCoverSrc: async (item) => {
-    switch (item.type) {
-      case 'custom':
-        return item.cover;
-      case 'bandori':
-        return (await Bestdori.getOfficialSongInfo(item.id)).cover;
-      case 'llsif':
-        return `https://card.llsif.moe/asset/${await this.getSifInfo(item.id).cover}`;
-      case 'osu':
-        return `https://assets.ppy.sh/beatmaps/${item.id}/covers/cover.jpg`;
-      default:
-        return ''
+    try {
+      switch (item.type) {
+        case 'custom':
+          return item.cover;
+        case 'bandori':
+          return (await Bestdori.getOfficialSongInfo(item.id)).cover;
+        case 'llsif':
+          return `https://card.llsif.moe/asset/${(await getSifInfo(item.id)).cover}`;
+        case 'osu':
+          return `https://assets.ppy.sh/beatmaps/${item.id}/covers/cover.jpg`;
+        default:
+          return ''
+      }
+    } catch {
+      return '';
     }
-  },
-  getSifInfo: async (id) => {
-    let data = await Vue.prototype.$axios.get('https://bestdori.com/api/misc/llsif.5.json');
-    if (data && data[id]) return data[id];
-    else throw new Error('ERR_NO_LLSIF_SONG_DATA');
   }
 }
 
