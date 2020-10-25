@@ -109,7 +109,7 @@ export default {
       cn2: 'China-Shanghai (1Mbps, Baidu CDN)',
       cn3: 'China-Beijing (5Mbps, Baidu CDN)',
       cn4: 'China-Shanghai (5Mbps, Tencent & Baidu CDN)',
-      fr: 'French-Eppes (Duplex 100Mbps)'
+      fr: 'U.S. (Duplex 200Mbps, cloudflare)'
     },
     live: {
       title: 'Live',

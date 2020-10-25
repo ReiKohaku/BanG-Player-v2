@@ -105,11 +105,11 @@ export default {
     },
     proxys: {
       direct: 'Bestdori!に直接接続（デフォルト）',
-      cn1: '中国-張家口（1Mbps、）',
+      cn1: '中国-張家口（1Mbps）',
       cn2: '中国-上海（1Mbps、Baidu CDN）',
       cn3: '中国-北京（5Mbps、Baidu CDN）',
       cn4: '中国-上海（5Mbps、Tencent & Baidu CDN）',
-      fr1: 'フランス（100 Mbps、Cloudflare）'
+      fr1: 'アメリカ（200 Mbps、Cloudflare）'
     },
     live: {
       title: 'ライブ設定',
