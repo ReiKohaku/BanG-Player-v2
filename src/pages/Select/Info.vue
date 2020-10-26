@@ -52,7 +52,7 @@
                                icon="mdi-home"
                                size="md"
                                @click="$sound.tap(), onSetIndexMusic()"
-                               :disable="loading || !shareTypeList.includes(chartInfo.type)" />
+                               :disable="loading || !shareTypeList.includes(chartInfo.type)"/>
                         <q-btn class="absolute-top-left"
                                style="margin: 30px -12px"
                                round
@@ -232,6 +232,14 @@ export default {
       }
     },
     async onSetIndexMusic() {
+      if (this.$store.state.special.length > 0) {
+        this.$q.notify({
+          message: this.$i18n.t('public.tip'),
+          caption: this.$i18n.t('TIP_FORBIDDEN_CHANGE'),
+          icon: 'info'
+        });
+        return;
+      }
       this.$q.loading.show();
       try {
         const timePoints = [], offset = 0;
@@ -251,8 +259,8 @@ export default {
           time: 0,
           beat: 0
         }
-        for(const i of chartData) {
-          if(i.type.toLowerCase() === 'system' && i.cmd.toLowerCase() === 'bpm') {
+        for (const i of chartData) {
+          if (i.type.toLowerCase() === 'system' && i.cmd.toLowerCase() === 'bpm') {
             const t = {
               bpm: i.bpm,
               time: ((i.beat - lastTimepoint.beat) * 60 / lastTimepoint.bpm) || 0
@@ -263,7 +271,8 @@ export default {
               beat: i.beat
             };
           }
-        };
+        }
+        ;
         const settings = this.$settings.getAll();
         settings.bgm = {
           src: this.chartInfo.audio,
@@ -275,13 +284,13 @@ export default {
         this.$store.commit('settings/updateSettings', settings);
         this.$q.notify({
           message: this.$i18n.t('public.success'),
-          caption: this.$i18n.t('INFO_SET_INDEX_MUSIC_SUCCESS', [this.$lang.getInLang(this.$i18n.locale ,this.chartInfo.title)]),
+          caption: this.$i18n.t('INFO_SET_INDEX_MUSIC_SUCCESS', [this.$lang.getInLang(this.$i18n.locale, this.chartInfo.title)]),
           icon: 'mdi-check'
         })
       } catch (e) {
         this.$q.notify({
           message: this.$i18n.t('public.error'),
-          caption: this.$i18n.t('ERR_SET_INDEX_MUSIC_FAILED', [this.$lang.getInLang(this.$i18n.locale ,this.chartInfo.title)]),
+          caption: this.$i18n.t('ERR_SET_INDEX_MUSIC_FAILED', [this.$lang.getInLang(this.$i18n.locale, this.chartInfo.title)]),
           icon: 'mdi-close'
         })
       }
@@ -434,7 +443,7 @@ export default {
   },
   async mounted() {
     this.difficulty = this.difficulties[this.difficulties.length - 1].value;
-    if(this.chartInfo.audio !== this.$settings.get('bgm').src) {
+    if (this.chartInfo.audio !== this.$settings.get('bgm').src) {
       this.$audio.changeAudioWithFadeOut(this.$settings.usePreferProxyUrl(this.chartInfo.audio), () => {
         // this.rotateTimer = setInterval(this.setBtnRotate, 100);
         this.$audio.cover = this.$settings.usePreferProxyUrl(typeof this.chartInfo.cover === 'object' ? this.chartInfo.cover[0] : this.chartInfo.cover);
@@ -447,7 +456,7 @@ export default {
   async beforeDestroy() {
     this.$store.commit('downloadDialog/clear');
     // if (this.rotateTimer) clearInterval(this.rotateTimer);
-    if(this.chartInfo.audio !== this.$settings.get('bgm').src) {
+    if (this.chartInfo.audio !== this.$settings.get('bgm').src) {
       this.$audio.fadeOutPause(() => {
         this.$audio.setDefaultAudio();
         this.$audio.play();

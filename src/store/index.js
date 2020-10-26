@@ -8,6 +8,10 @@ import mods from 'src/store/mods'
 import axiosCanceller from 'src/store/axiosCanceller'
 import downloadDialog from 'src/store/downloadDialog'
 import notification from 'src/store/notification'
+import Settings from "src/lib/util/settings";
+
+import { colors } from 'quasar';
+import {updateSettings} from "src/store/settings/mutations";
 
 Vue.use(Vuex)
 
@@ -33,7 +37,8 @@ const Store = new Vuex.Store({
       averageSpeed: 0, //number, Byte(s)/s
       progress: 0, //number, percentage, 0~1
       finished: false
-    }
+    },
+    special: Settings.getCurrentSpecial()
   },
   mutations: {
     setStarted: (state) => {
@@ -45,10 +50,16 @@ const Store = new Vuex.Store({
         downloadInfo = JSON.parse(JSON.stringify(payload));
         state.downloadInfo = downloadInfo;
       } catch {}
+    },
+    updateSpecial: (state, payload) => {
+      state.special = payload;
+      if (state.special === 'halloween') colors.setBrand('primary', '#E65100');
+      else colors.setBrand('primary', '#F06292');
     }
   },
   strict: process.env.DEV
 })
 
+Store.commit('updateSpecial', Store.state.special);
 // 直接暴露实例，以便在外部js中访问
 export default Store;

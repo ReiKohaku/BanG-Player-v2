@@ -7,6 +7,7 @@ export default {
     LABEL_SETTINGS: '設定',
     LABEL_NOTIFICATION: 'お知らせ',
     LABEL_WIKI: 'Wiki',
+    LABEL_MORE: 'その他',
     LABEL_CLEAR: 'すべてのデータをクリア',
     HINT_CLEAR: 'プレーヤーが正常でない場合は、データをクリアしてみてください。',
     LABEL_START_GAME: 'ライブを始めましょう！',

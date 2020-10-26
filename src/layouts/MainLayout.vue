@@ -1,6 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-page-container class="bg" v-if="started">
+    <q-page-container class=""
+                      :style="`${background}; `"
+                      v-if="started">
       <router-view/>
       <top-menu />
     </q-page-container>
@@ -52,6 +54,18 @@
           this.$store.commit('downloadDialog/update', {
             display: v
           });
+        }
+      },
+      background: {
+        get() {
+          switch (this.$store.state.special) {
+            case 'halloween':
+              return `
+              background: url('img/bg${this.$store.state.special.length > 0 ? `_${this.$store.state.special}` : ''}.png') repeat;`;
+              break;
+            default:
+              return `background: url('img/bg.png') repeat`;
+          }
         }
       }
     },

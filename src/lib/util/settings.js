@@ -1,4 +1,5 @@
 import Quasar from 'quasar';
+import Store from 'src/store';
 
 const languageList = ['en-us', 'zh-cn', 'ja-jp'];
 const languageName = {
@@ -84,7 +85,8 @@ const defaultConfig = {
     artist: 'BanG Dream!',
     offset: 0,
     timePoints: [{bpm: 140, time: 0}]
-  }
+  },
+  special: ''
 }
 
 function copyObject(object) {
@@ -114,6 +116,22 @@ const Settings = {
   backgroundList,
   proxyList,
   langIsoList,
+  getBgm: function () {
+    switch (this.getCurrentSpecial()) {
+      case 'halloween':
+        return {
+          src: 'sound/bgm/halloween.mp3',
+          cover: 'img/bgm_halloween.jpg',
+          title: 'デイタイム♪',
+          artist: 'BanG Dream!',
+          offset: 0.15,
+          timePoints: [{bpm: 94.5, time: 0}]
+        };
+        break;
+      default:
+        return this.get('bgm');
+    }
+  },
   getAll() {
     let config = {};
     try {
@@ -127,11 +145,20 @@ const Settings = {
   },
   setAll(config) {
     localStorage.setItem('settings', JSON.stringify(config));
+    if (Store && Store.commit) Store.commit('updateSpecial', this.getCurrentSpecial());
   },
   set(key, value) {
     const config = this.getAll();
     config[key] = value;
     this.setAll(config);
+  },
+  getCurrentSpecial() {
+    const special = this.get('special');
+    const date = new Date();
+    // if (special === 'halloween') return special;
+    if (special === 'halloween' && date.getMonth() === 10 && date.getDate() === 1) return 'halloween'
+    else if (this.get('special') !== '') this.set('special', '');
+    return '';
   },
   getPreferProxyUrl() {
     if (Settings.get('proxy').proxy) return Settings.get('proxy').value;

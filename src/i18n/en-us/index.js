@@ -7,6 +7,7 @@ export default {
     LABEL_SETTINGS: 'Settings',
     LABEL_NOTIFICATION: 'Notification',
     LABEL_WIKI: 'Wiki',
+    LABEL_MORE: 'More',
     LABEL_CLEAR: 'Clear all data',
     HINT_CLEAR: 'Try clear all data when player goes abnormal.',
     LABEL_START_GAME: 'Let\'s live!',

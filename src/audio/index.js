@@ -59,7 +59,7 @@ const Audio = {
   },
   setDefaultAudio() {
     if (audioPlayer && !disable) {
-      const bgm = Vue.prototype.$settings.get('bgm');
+      const bgm = Vue.prototype.$settings.getBgm();
       audioPlayer.src = bgm.src;
       this.title = bgm.title;
       this.artist = bgm.artist;
