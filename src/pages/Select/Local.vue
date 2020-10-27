@@ -182,9 +182,11 @@
           });
           const chartInfo = chart.chartInfo;
           chartInfo.type = 'bangpack';
-          chartInfo.audio = await this.$file.readFile(audio, 'dataurl');
-          chartInfo.audio = chartInfo.audio.replace('data:application/octet-stream', 'data:audio/mp3');
-          chartInfo.cover = await this.$file.readFile(cover, 'dataurl');
+          // chartInfo.audio = await this.$file.readFile(audio, 'dataurl');
+          // chartInfo.audio = chartInfo.audio.replace('data:application/octet-stream', 'data:audio/mp3');
+          chartInfo.audio = window.URL.createObjectURL(audio);
+          // chartInfo.cover = await this.$file.readFile(cover, 'dataurl');
+          chartInfo.cover = window.URL.createObjectURL(cover);
           this.$store.commit('chartInfo/updateChartInfo', chartInfo);
           this.$store.commit('chartInfo/updateChartData', chart.chartData);
           await this.$router.push('/info');
@@ -231,16 +233,19 @@
           chartInfo.artist = chartInfo.artist || this.$t('local.auto.defaultArtist');
           chartInfo.author = chartInfo.author || this.$t('local.auto.defaultAuthor');
           chartData[chartInfo.difficulty[0].type] = JSON.parse(this.autoChartData);
-          chartInfo.audio = await this.$file.readFile(chartInfo.audio, 'dataurl');
+          // chartInfo.audio = await this.$file.readFile(chartInfo.audio, 'dataurl');
+          chartInfo.audio = window.URL.createObjectURL(chartInfo.audio);
           if(typeof chartInfo.cover === 'string') {
             const coverFile = new Blob([await this.$file.getFile(chartInfo.cover)]);
-            chartInfo.cover = await this.$file.readFile(coverFile, 'dataurl');
-          } else chartInfo.cover = await this.$file.readFile(chartInfo.cover, 'dataurl');
+            // chartInfo.cover = await this.$file.readFile(coverFile, 'dataurl');
+            chartInfo.cover = window.URL.createObjectURL(coverFile);
+          } else chartInfo.cover = window.URL.createObjectURL(chartInfo.cover);
+          //else chartInfo.cover = await this.$file.readFile(chartInfo.cover, 'dataurl');
           this.$store.commit('chartInfo/updateChartInfo', chartInfo);
           this.$store.commit('chartInfo/updateChartData', chartData);
           await this.$router.push('/info');
         } catch(e) {
-          console.log(e);
+          // console.log(e);
         }
         this.$q.loading.hide();
       }

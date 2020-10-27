@@ -151,7 +151,8 @@ export async function toGameLoadConfig(chartInfo, chartData, coverIndex) {
       Store.commit('downloadDialog/update', {message: i18n.t('pack.MSG_GETTING_AUDIO')});
       let buffer = await Vue.prototype.$file.getFile(gameLoadConfig.musicSrc);
       let blob = new Blob([buffer]);
-      gameLoadConfig.musicSrc = await Vue.prototype.$file.readFile(blob, 'dataurl');
+      // gameLoadConfig.musicSrc = await Vue.prototype.$file.readFile(blob, 'dataurl');
+      gameLoadConfig.musicSrc = window.URL.createObjectURL(blob);
       /*
       let musicDataUrl = gameLoadConfig.musicSrc;
 
@@ -166,7 +167,6 @@ export async function toGameLoadConfig(chartInfo, chartData, coverIndex) {
       */
 
     } catch(e) {
-      console.log(e);
       if(Vue.prototype.$axios.isCancel(e)) throw new Error('Canceled');
     }
     let coverSrc = '';
