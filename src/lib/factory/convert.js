@@ -153,19 +153,6 @@ export async function toGameLoadConfig(chartInfo, chartData, coverIndex) {
       let blob = new Blob([buffer]);
       // gameLoadConfig.musicSrc = await Vue.prototype.$file.readFile(blob, 'dataurl');
       gameLoadConfig.musicSrc = window.URL.createObjectURL(blob);
-      /*
-      let musicDataUrl = gameLoadConfig.musicSrc;
-
-      let reader = new FileReader();
-      reader.onload = async e => {
-        musicDataUrl = reader.result;
-      };
-      if (blob) {
-        await reader.readAsDataURL(blob);
-      }
-      gameLoadConfig.musicSrc = musicDataUrl;
-      */
-
     } catch(e) {
       if(Vue.prototype.$axios.isCancel(e)) throw new Error('Canceled');
     }

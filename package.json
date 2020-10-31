@@ -10,19 +10,20 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.9.10",
     "axios": "^0.18.1",
     "bangbangboom-game": "git+https://gitee.com/ReiKohaku/bangbangboom-game.git",
     "core-js": "^3.6.5",
     "howler": "^2.2.0",
     "jszip": "^3.5.0",
-    "quasar": "^1.0.0",
+    "quasar": "^1.14.3",
     "showdown": "^1.9.1",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
-    "@quasar/icongenie": "^2.3.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@quasar/app": "^2.1.6",
+    "@quasar/icongenie": "^2.3.3",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
