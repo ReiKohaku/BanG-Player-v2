@@ -85,7 +85,7 @@ export default {
   settings: {
     clearConfirm: '你真的想要清除所有数据吗？',
     skins: {
-      skin: '跟随谱面变化',
+      skin: '跟随皮肤变化',
       skin00: '默认',
       skin01: '皮肤2',
       skin02: '皮肤3',
