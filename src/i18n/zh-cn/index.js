@@ -100,6 +100,7 @@ export default {
       gbp2020: 'Garupa 2020',
       april_fool: '愚人节',
       coin: '某科学的超电磁炮T',
+      witch: '小魔女doremi',
       cover: '使用歌曲封面',
       black: '纯黑',
       custom: '自定义图片'

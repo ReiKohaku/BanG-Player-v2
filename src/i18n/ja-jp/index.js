@@ -100,6 +100,7 @@ export default {
       gbp2020: 'ガルパ2020',
       april_fool: 'エイプリルフール',
       coin: 'とある科学の超電磁砲T',
+      witch: 'おジャ魔女どれみ',
       cover: '楽曲カバー',
       black: 'ブラック',
       custom: 'カスタム'

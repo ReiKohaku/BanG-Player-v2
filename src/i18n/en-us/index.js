@@ -100,6 +100,7 @@ export default {
       gbp2020: 'Garupa 2020',
       april_fool: 'April fool',
       coin: 'A Certain Scientific Railgun T',
+      witch: 'Magical DoReMi',
       cover: 'Use song\'s cover',
       black: 'Black',
       custom: 'Choose a picture you like'
