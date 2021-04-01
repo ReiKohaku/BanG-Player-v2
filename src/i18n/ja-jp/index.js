@@ -99,6 +99,8 @@ export default {
       maid: 'Re：ゼロから始める異世界生活',
       gbp2020: 'ガルパ2020',
       april_fool: 'エイプリルフール',
+      april_fool_2021_cn: 'エイプリルフール2021（中国）',
+      april_fool_2021_jp: 'エイプリルフール2021（日本）',
       coin: 'とある科学の超電磁砲T',
       witch: 'おジャ魔女どれみ',
       cover: '楽曲カバー',

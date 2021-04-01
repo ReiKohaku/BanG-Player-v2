@@ -99,6 +99,8 @@ export default {
       maid: 'Re: Life in a different world from zero',
       gbp2020: 'Garupa 2020',
       april_fool: 'April fool',
+      april_fool_2021_cn: 'April fool 2021(CN)',
+      april_fool_2021_jp: 'April fool 2021(JP)',
       coin: 'A Certain Scientific Railgun T',
       witch: 'Magical DoReMi',
       cover: 'Use song\'s cover',

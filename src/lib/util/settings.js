@@ -7,9 +7,9 @@ const languageName = {
   'zh-cn': '中文（简体）',
   'ja-jp': '日本語'
 }
-const skinList = ['skin00', 'skin04', 'cafe', 'miku', 'maid', 'april_fool', 'coin', 'witch'];
-const soundList = ['skin', 'skin00', 'skin01', 'skin02', 'skin03', 'persona', 'cafe', 'miku', 'maid', 'april_fool', 'coin', 'witch'];
-const backgroundList = ['skin', 'challenge', 'gbp2020', 'vs', 'persona', 'cafe', 'miku', 'maid', 'coin', 'witch', 'cover', 'black', 'custom'];
+const skinList = ['skin00', 'skin04', 'cafe', 'miku', 'maid', 'april_fool', 'april_fool_2021_cn', 'april_fool_2021_jp', 'coin', 'witch'];
+const soundList = ['skin', 'skin00', 'skin01', 'skin02', 'skin03', 'persona', 'cafe', 'miku', 'maid', 'april_fool', 'april_fool_2021_cn', 'april_fool_2021_jp', 'coin', 'witch'];
+const backgroundList = ['skin', 'challenge', 'gbp2020', 'vs', 'persona', 'cafe', 'miku', 'maid', 'april_fool_2021_cn', 'april_fool_2021_jp', 'coin', 'witch', 'cover', 'black', 'custom'];
 const proxyList = [
   {
     label: 'direct',

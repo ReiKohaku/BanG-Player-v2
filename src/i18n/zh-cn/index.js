@@ -99,6 +99,8 @@ export default {
       maid: 'Re:从零开始的异世界生活',
       gbp2020: 'Garupa 2020',
       april_fool: '愚人节',
+      april_fool_2021_cn: '愚人节2021（国服）',
+      april_fool_2021_jp: '愚人节2021（日服）',
       coin: '某科学的超电磁炮T',
       witch: '小魔女doremi',
       cover: '使用歌曲封面',
