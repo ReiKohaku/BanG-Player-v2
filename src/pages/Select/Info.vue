@@ -211,7 +211,7 @@ export default {
         if (this.chartInfo.type === 'official')
           chartData = await this.$bestdori.getOfficialChartData(this.chartInfo.id, this.difficulty);
         else if (this.chartInfo.type === 'bestdori')
-          chartData = (await this.$bestdori.getCommunityChartData(this.chartInfo.id)).post.notes;
+          chartData = (await this.$bestdori.getCommunityChartData(this.chartInfo.id)).post.chart;
         else if (this.chartInfo.type === 'bangpack' || this.chartInfo.type === 'auto')
           chartData = JSON.parse(JSON.stringify(this.chartData[this.difficulty]));
         else throw new Error('ERR_UNKNOWN_CHART_TYPE');
@@ -222,6 +222,7 @@ export default {
         this.$audio.setDisable(true);
         await this.$router.push('/game');
       } catch (e) {
+        console.error(e)
         if (e.message !== 'Canceled') this.$q.notify({
           message: this.$t('public.error'),
           caption: this.$t(e.message),

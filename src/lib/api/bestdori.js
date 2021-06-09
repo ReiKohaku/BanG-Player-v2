@@ -59,12 +59,9 @@ const OfficialUtil = {
     }
     let list = [];
     jacketImage.forEach(item => {
-      if (assetServer === 'en') list.push(`https://bestdori.com/assets/en/musicjacket/${item}_rip/jacket.png`);
-      else {
-        let num = (Math.floor(id / 10) === id / 10) ? id / 10 : Math.floor(id / 10) + 1;
-        num *= 10;
-        list.push(`https://bestdori.com/assets/${assetServer}/musicjacket/musicjacket${num}_rip/assets-star-forassetbundle-startapp-musicjacket-musicjacket${num}-${item}-jacket.png`);
-      }
+      let num = (Math.floor(id / 10) === id / 10) ? id / 10 : Math.floor(id / 10) + 1;
+      num *= 10;
+      list.push(`https://bestdori.com/assets/${assetServer}/musicjacket/musicjacket${num}_rip/assets-star-forassetbundle-startapp-musicjacket-musicjacket${num}-${item}-jacket.png`);
     })
     return list;
   },
@@ -128,7 +125,8 @@ const CommunityUtil = {
 
 export const Bestdori = {
   async getOfficialSongList(refresh) {
-    if(refresh || !officialChartList) officialChartList = await Vue.prototype.$axios.get('https://bestdori.com/api/songs/all.5.json');
+    if(refresh || !officialChartList)
+      officialChartList = await Vue.prototype.$axios.get('https://bestdori.com/api/songs/all.5.json');
     const list = [];
     for (const i in officialChartList) {
       list.push({
@@ -192,7 +190,7 @@ export const Bestdori = {
     }
   },
   async getOfficialChartData(id, diff) {
-    const data = await Vue.prototype.$axios.get(`https://bestdori.com/api/songs/chart/${id}.${diff}.json`);
+    const data = await Vue.prototype.$axios.get(`https://bestdori.com/api/charts/${id}/${diff}.json`);
     return data;
   },
   async getCommunityChartInfo(id) {

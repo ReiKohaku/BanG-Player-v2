@@ -9,7 +9,7 @@ function bestdori(content) {
   let slides = [];
   let posA = -1;
   let posB = -1;
-  let long = [-1, -1, -1, -1, -1, -1, -1];
+  let long = {};
 
   let time = (beat, timepoint) => {
     let time = 0;
@@ -25,54 +25,53 @@ function bestdori(content) {
   }
 
   content.forEach(item => {
+    time(item.beat, timepoint)
     switch (item.type) {
-      case 'System':
-        if (item.cmd === 'BPM') timepoint.push(item);
+      case 'BPM':
+        timepoint.push(item);
         break;
-      case 'Note':
-        let note = {
-          time: time(item.beat, timepoint),
-          lane: item.lane - 1,
-          onbeat: item.beat % 0.5 === 0
-        };
-        if (item.note === 'Slide') {
-          note.type = 'slide';
-          if (item.start) {
-            let slide = {id: slides.length, flickend: false};
-            (item.pos === 'A') ? (posA = slide.id) : (posB = slide.id);
-            slides.push(slide);
-            note.slideid = slide.id;
-          } else if (item.end) {
-            note.slideid = (item.pos === 'A') ? posA : posB;
-            if (note.slideid === -1) {
-              //因为有的谱面有很奇怪的无长度绿条，所以加一个判断
-              note.type = item.flick ? 'flick' : 'single';
-              break;
-            }
-            if (item.flick) slides[note.slideid].flickend = true;
-            (item.pos === 'A') ? (posA = -1) : (posB = -1);
-          } else note.slideid = (item.pos === 'A') ? posA : posB;
-        } else if (item.note === 'Long') {
-          note.type = 'slide';
-          if (item.start) {
-            let slide = {id: slides.length, flickend: false};
-            long[note.lane] = slide.id;
-            note.slideid = slide.id;
-            slides.push(slide);
-          } else if (item.end) {
-            note.slideid = long[note.lane];
-            if (item.flick) slides[note.slideid].flickend = true;
-            long[note.lane] = -1
-          } else note.slideid = long[note.lane]
-        } else {
-          note.type = item.flick ? 'flick' : 'single';
+      case 'Long':
+        if (item.connections[0] && item.connections[1]) {
+          const slide = {id: slides.length, flickend: false};
+          for (const i in item.connections) {
+            notes.push({
+              type: "slide",
+              lane: item.connections[i].lane,
+              time: time(item.connections[i].beat, timepoint),
+              slideid: slide.id
+            })
+            slide.flickend = !!item.connections[i].flick
+          }
+          slides.push(slide)
         }
-        notes.push(note);
+      case 'Slide':
+        const slide = {id: slides.length, flickend: false};
+        for (let i = 0; i < item.connections.length; i++) {
+          notes.push({
+            type: "slide",
+            lane: item.connections[i].lane,
+            time: time(item.connections[i].beat, timepoint),
+            slideid: slide.id
+          })
+          if (i + 1 === item.connections.length) {
+            slide.flickend = !!item.connections[i].flick
+          }
+        }
+        slides.push(slide)
+        break;
+      case 'Single':
+        notes.push({
+          type: item.flick ? "flick" : "single",
+          lane: item.lane,
+          time: time(item.beat, timepoint),
+          onbeat: item.beat % 0.5 === 0
+        })
         break;
       default:
         break;
     }
   })
+  console.log({notes, slides})
   return {notes, slides};
 }
 
@@ -128,7 +127,7 @@ export function toMapContent(chartInfo, chartData) {
   let content = null;
   if (chartInfo.type === 'official' || chartInfo.type === 'bestdori' || Array.isArray(chartData)) {
     content = bestdori(chartData);
-  } else if (chartInfo.type === 'bangbangboomv2' || (chartData.timepoints && chartData.notes)) {
+  } else if (chartInfo.type === 'bangbangboomv2' || (chartData.timepoints && chartData.chart)) {
     content = bangbangboomv2(chartData);
   } else if (chartInfo.type === 'bbbMapContent' || (chartData.notes && chartData.slides)) {
     content = chartData;
