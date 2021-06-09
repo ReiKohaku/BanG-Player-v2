@@ -47,9 +47,9 @@ function bestdori(content) {
       case 'Slide':
         const slide = {id: slides.length, flickend: false};
         for (let i = 0; i < item.connections.length; i++) {
-          notes.push({
+          if (i === 0 || i === item.connections.length - 1 || !item.connections[i].hidden) notes.push({
             type: "slide",
-            lane: item.connections[i].lane,
+            lane: Math.round(item.connections[i].lane),
             time: time(item.connections[i].beat, timepoint),
             slideid: slide.id
           })
@@ -58,6 +58,13 @@ function bestdori(content) {
           }
         }
         slides.push(slide)
+        break;
+      case 'Directional':
+        notes.push({
+          type: "flick",
+          lane: item.lane,
+          time: time(item.beat, timepoint)
+        })
         break;
       case 'Single':
         notes.push({
